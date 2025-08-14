@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Apartment_Project.Models.Apartment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SomePhoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAvailable)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SomePhoto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                    @if (item.IsAvailable)
+                    {
+                        <span> Available </span>
+                    }
+                    else
+                    {
+                        <span> Not Available </span>
+                    }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">تعديل</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">التفاصيل </a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">حذف</a> |
+                @if (item.IsAvailable)
+                {
+                    <a asp-action="Book" asp-route-id="@item.ID">احجز الان</a>
+                }
+                else
+                {
+                    <span> تم الحجز </span>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
